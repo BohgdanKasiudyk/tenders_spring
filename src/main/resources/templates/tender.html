@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <title>View Tender</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<h1>Lot</h1>
+<a th:href="@{/tender/allActiveTenders}">Back to tender List</a>
+<br/><br/>
+<div>
+  <table>
+    <tr>
+      <td>ID</td>
+      <td>:</td>
+      <td th:utext="${tender.id}">...</td>
+    </tr>
+    <tr>
+      <td>Name</td>
+      <td>:</td>
+      <td th:utext="${tender.name}">...</td>
+    </tr>
+    <tr>
+      <td>Start bet</td>
+      <td>:</td>
+      <td th:utext="${tender.startBet}">...</td>
+    </tr>
+    <tr>
+      <td>Active bet</td>
+      <td>:</td>
+      <td th:utext="${tender.activeBet}">...</td>
+    </tr>
+    <tr>
+      <form th:action="@{/bet/{userId}/{tenderId}(tenderId=${tender.id}, userId=${session.userId})}" th:object="${bet}" method="POST">
+        <input type="number" th:field="*{betAmount}" />
+        <input type="submit" th:value="Bet" />
+      </form>
+    </tr>
+  </table>
+</div>
+</body>
+</html>

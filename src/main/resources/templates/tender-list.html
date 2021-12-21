@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Tender List</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<h1>Tender List</h1>
+<a th:href="@{/tender/allUserCreatedTenders}">All your tenders</a>
+<br/><br/>
+<a th:href="@{/tender/createTender}">Create tender</a>
+<br/><br/>
+<a th:href="@{/tender/allActiveTenders}">All active tenders</a>
+<br/><br/>
+<form th:action="@{/tender/search}" method="get">
+  <input type="text" th:name="search" th:placeholder="Search" />
+  <button type="submit">Search</button>
+</form>
+<br/><br/>
+<div>
+  <table>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Open</th>
+    </tr>
+    <tr th:each="tender : ${tenders}">
+      <td><a th:utext="${tender.id}">...</a></td>
+      <td><a th:utext="${tender.name}">...</a></td>
+      <td><a th:href="@{/tender/{id}(id=${tender.id})}">Open</a></td>
+    </tr>
+  </table>
+</div>
+<br/><br/>
+</body>
+</html>
