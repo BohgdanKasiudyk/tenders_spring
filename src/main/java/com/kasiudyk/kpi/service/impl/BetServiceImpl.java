@@ -18,7 +18,7 @@ public class BetServiceImpl implements BetService {
     @Override
     public boolean bet(Long userId, Long lotId, Bet bet) {
         Tender tender = tenderRepository.getTenderById(lotId);
-        if(tender.getActiveBet() >= bet.getAmount()) {
+        if(tender.getActiveBet() <= bet.getAmount()) {
             return false;
         } else {
             tender.setActiveBet(bet.getAmount());
