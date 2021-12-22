@@ -38,15 +38,15 @@ public class TenderServiceImpl implements TenderService {
     }
 
     @Override
-    public void startTender(Long TenderId) {
-        Tender tender = tenderRepository.getTenderById(TenderId);
+    public void startTender(Long tenderId) {
+        Tender tender = tenderRepository.getTenderById(tenderId);
         tender.setTenderStatus(TenderStatus.ACTIVE);
 
     }
 
     @Override
-    public void stopTender(Long TenderId) {
-        Tender tender = tenderRepository.getTenderById(TenderId);
+    public void stopTender(Long tenderId) {
+        Tender tender = tenderRepository.getTenderById(tenderId);
         tender.setTenderStatus(TenderStatus.STOPPED);
     }
 

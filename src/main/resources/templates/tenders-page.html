@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta content="ie=edge" http-equiv="x-ua-compatible">
+    <title>Tenders</title>
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" rel="stylesheet">
+    <link crossorigin="anonymous" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+          integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" rel="stylesheet">
+</head>
+<body>
+<div class="container my-5">
+    <div class="card">
+        <div class="card-body">
+            <h3>Tenders</h3>
+            <a class="my-5">
+                <a class="btn btn-primary" href="/tender/createTender"><i>Create tender</i></a>
+            </a>
+            <a class="my-5">
+                <a class="btn btn-primary" href="/tender/allUserCreatedTenders"><i>Created tenders</i></a>
+            </a>
+            <a class="my-5">
+                <a class="btn btn-primary" href="/tender/allActiveTenders"><i>Active tenders</i></a>
+            </a>
+            <a class="btn btn-primary">
+                <form method="get" th:action="@{/tender/search}">
+                    <input th:name="search" th:placeholder="Search" type="text"/>
+                    <button class="btn btn-primary" type="submit">Search</button>
+                </form>
+            </a>
+
+            <div class="container my-5" th:switch="${tenders.size()}">
+                <div class="col-md-10">
+                    <h2 th:case="0">No tenders yet!</h2>
+                    <div th:case="*">
+                        <table class="table table-striped table-responsive-md">
+                            <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Active bet</th>
+                                <th>Start bet</th>
+                                <th>Open</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="tender : ${tenders}">
+                                <td th:text="${tender.name}"></td>
+                                <td th:text="${tender.activeBet}"></td>
+                                <td th:text="${tender.startBet}"></td>
+                                <td><a class="btn btn-primary" th:href="@{/tender/{id}(id=${tender.id})}"><i
+                                        class="fas fa-user-edit ml-2"></i></a></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

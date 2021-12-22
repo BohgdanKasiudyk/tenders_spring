@@ -37,8 +37,8 @@ public class KpiApplication {
     @Bean
     public boolean setUpTestDataTender(TenderRepository tenderRepository) {
         tenderRepository.createTender(new Tender()
-                .setName("lotName1")
-                .setDescription("lotDescription1")
+                .setName("Name1")
+                .setDescription("Description1")
                 .setStartBet(100L)
                 .setActiveBet(0L)
                 .setTenderStatus(TenderStatus.ACTIVE)

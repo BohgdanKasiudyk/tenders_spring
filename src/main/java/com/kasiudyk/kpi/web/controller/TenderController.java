@@ -26,7 +26,7 @@ public class TenderController {
     }
 
     @GetMapping("/allActiveTenders")
-    public String allActiveLots(Model model, HttpSession session) {
+    public String allActiveTenders(Model model, HttpSession session) {
         Long userId = (Long) session.getAttribute("userId");
 
         if (userId == null) {
@@ -34,13 +34,13 @@ public class TenderController {
             model.addAttribute("loginUserDto", new LoginUserDto());
             return "redirect:/user/login";
         } else {
-            model.addAttribute("lots", tenderService.getActiveTenders());
-            return "tender-list";
+            model.addAttribute("Tenderss", tenderService.getActiveTenders());
+            return "tenders-page";
         }
     }
 
     @GetMapping("/allUserCreatedTenders")
-    public String allUserCreatedLots(Model model, HttpSession session) {
+    public String allUserCreatedTenders(Model model, HttpSession session) {
         Long userId = (Long) session.getAttribute("userId");
 
         if (userId == null) {
@@ -48,8 +48,8 @@ public class TenderController {
             model.addAttribute("loginUserDto", new LoginUserDto());
             return "redirect:/user/login";
         } else {
-            model.addAttribute("lots", tenderService.getUserCreateTenders(userId));
-            return "tender-list";
+            model.addAttribute("Tenders", tenderService.getUserCreateTenders(userId));
+            return "tenders-";
         }
     }
 
@@ -101,7 +101,7 @@ public class TenderController {
 
     @PostMapping("/createTender")
     public String createTender(Model model, HttpSession session,
-                            @ModelAttribute("lot") TenderDto tenderDto) {
+                            @ModelAttribute("tender") TenderDto tenderDto) {
         Long userId = (Long) session.getAttribute("userId");
 
         if (userId == null) {
@@ -116,7 +116,7 @@ public class TenderController {
                     .setStartBet(tenderDto.getStartBet())
             );
 
-            return "redirect:/lot/allUserCreatedTenders";
+            return "redirect:/tender/allUserCreatedTenders";
         }
     }
 
@@ -130,7 +130,7 @@ public class TenderController {
             return "redirect:/user/login";
         } else {
             tenderService.startTender(tenderId);
-            return "redirect:/lot/" + tenderId;
+            return "redirect:/tender/" + tenderId;
         }
     }
 
@@ -144,12 +144,12 @@ public class TenderController {
             return "redirect:/user/login";
         } else {
             tenderService.stopTender(tenderId);
-            return "redirect:/lot/" + tenderId;
+            return "redirect:/tender/" + tenderId;
         }
     }
 
     @PostMapping("remove/{tenderId}")
-    public String removeLot(Model model, HttpSession session, @PathVariable Long tenderId) {
+    public String removeTender(Model model, HttpSession session, @PathVariable Long tenderId) {
         Long userId = (Long) session.getAttribute("userId");
 
         if (userId == null) {
@@ -158,7 +158,7 @@ public class TenderController {
             return "redirect:/user/login";
         } else {
             tenderService.removeTender(tenderId);
-            return "redirect:/lot/allUserCreatedTenders";
+            return "redirect:/tender/allUserCreatedTenders";
         }
 
 
@@ -175,7 +175,7 @@ public class TenderController {
         } else {
             List<Tender> tenders = tenderService.getActiveTenders(search);
             model.addAttribute("tenders", tenders);
-            return "tender-list";
+            return "tenders-page";
         }
     }
 
@@ -190,7 +190,7 @@ public class TenderController {
             return "redirect:/user/login";
         } else {
             String url = ServletUriComponentsBuilder.fromRequestUri(request)
-                    .replacePath("lot/" + tenderId)
+                    .replacePath("tender/" + tenderId)
                     .build()
                     .toUriString();
 

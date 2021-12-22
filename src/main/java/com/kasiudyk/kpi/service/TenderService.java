@@ -9,8 +9,8 @@ public interface TenderService {
     List<Tender> getUserCreateTenders(Long userId);
     Tender getTenderById(Long tenderId);
     void createTender(Long userId, Tender Tender);
-    void startTender(Long TenderId);
-    void stopTender(Long TenderId);
+    void startTender(Long tenderId);
+    void stopTender(Long tenderId);
     void removeTender(Long tenderId);
     String generateUrl(Long TenderId);
     List<Tender> getActiveTenders(String searchString);
